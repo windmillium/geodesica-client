@@ -13,6 +13,28 @@
       <span class="name"><%= health %></span>
     </script>
 
+    <script type="text/template" id="job-template">
+    </script>
+
+    <script type="text/template" id="jobs-template">
+      <div class="jobs">
+      </div>
+    </script>
+    <script type="text/template" id="mobile-template">
+    </script>
+
+    <script type="text/template" id="mobiles-template">
+      <div class="mobiles">
+      </div>
+    </script>
+    <script type="text/template" id="building-template">
+      <span id="<%= name %>" class="name"><%= name %></span>
+    </script>
+
+    <script type="text/template" id="buildings-template">
+      <div id="buildings">
+      </div>
+    </script>
     <script type="text/template" id="map-template">
       <h1>Map</h1>
       <div id="map" class="blocks">
@@ -20,27 +42,80 @@
     </script>
 
     <script type="application/javascript">
-      function refreshMap() {
-        window.map.fetch();
-        setTimeout(refreshMap,125);
-      }
-      jQuery(function() {
-        refreshMap();
-      });
+      window.buildings.fetch();
+      window.map.fetch();
+      setInterval(function() {
+        window.mobiles.fetch();
+        window.jobs.fetch();
+      }, 200);
     </script>
 
     <style type="text/css">
+      #container {
+        position:relative;
+        overflow:hidden;
+      }
+      #jobs {
+        width: 800px;
+        height: 600px;
+        position:absolute;
+        top:80px;
+        left:0;
+      }
+      .job {
+        width: 25px;
+        height: 25px;
+        background: rgba(100,100,0,.25);
+        position:absolute;
+      }
+      .dig {
+        background: rgba(200,100,0,.25);
+      }
+      #mobs {
+        width: 800px;
+        height: 600px;
+        position: absolute;
+        top:80px;
+        left:0;
+      }
       .block {
         position: absolute;
         height: 25px;
         width: 25px;
       }
 
-      #map {
-        position: relative;
+      .plant {
+        background-color: green;
+      }
+      .mobile {
+        height: 10px;
+        width: 10px;
+        border: 1px solid black;
+        position: absolute;
       }
 
+      #map {
+        position: relative;
+        width: 800px;
+        height: 600px;
+        border: 1px solid black;
+        overflow: hidden;
+      }
+      .selected {
+        border: 1px solid red;
+      }
 
+      .object {
+        border-bottom: 2px solid black;
+      }
+
+      #buildingmarker {
+        border: 1px solid red;
+        width:25px;
+        height:25px;
+        position:absolute;
+        z-index:-1;
+      }
     </style>
 
   </head>
@@ -49,6 +124,8 @@
     <h1>Geodesica</h1>
     <div id="container">
     </div>
+      <div id="buildingmarker">
+      </div>
   </body>
 </html>
 
