@@ -139,6 +139,20 @@
 
 
   window.Mobile = Backbone.Model.extend({});
+  window.MobileDetailView = Backbone.View.extend({
+    tagName: 'div',
+    className: 'mobileDetail',
+    initialize: function() {
+      _.bindAll(this, 'render');
+      this.model.bind('change', this.render);
+      this.template = _.template($('#mobile-detail-template').html());
+    },
+    render: function() {
+      var renderedContent = this.template(this.model.toJSON());
+      $(this.el).html(renderedContent);
+      return this;
+    }
+  });
   window.MobileView = Backbone.View.extend({
     tagName: 'div',
     className: 'mobile',
@@ -175,6 +189,28 @@
     }
   });
 
+  window.MobilesDetailView = Backbone.View.extend({
+    id: "mobs-detail",
+    initialize: function() {
+      _.bindAll(this, 'render');
+      this.template = _.template($('#mobiles-detail-template').html());
+      this.collection.bind('reset', this.render);
+    },
+    render: function() {
+      var $mobiles
+      var collection = this.collection;
+      $(this.el).html(this.template({}));
+      $mobiles = this.$('.mobiles');
+      collection.each(function(mobile) {
+        var view = new MobileDetailView({
+          model: mobile,
+          collection: collection
+        });
+        $mobiles.append(view.render().el);
+      });
+      return this;
+    }
+  });
   window.MobilesView = Backbone.View.extend({
     id: "mobs",
     initialize: function() {
@@ -330,6 +366,9 @@
       this.mapView = new MapView({
         collection: window.map
       });
+      this.mobilesDetailView = new MobilesDetailView({
+        collection: window.mobiles
+      });
       this.mobilesView = new MobilesView({
         collection: window.mobiles
       });
@@ -346,6 +385,7 @@
       $container.empty();
       $container.append(this.mapView.render().el);
       $container.append(this.mobilesView.render().el);
+      $container.append(this.mobilesDetailView.render().el);
       $container.append(this.buildingsView.render().el);
       $container.append(this.jobsView.render().el);
     }
