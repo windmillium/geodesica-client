@@ -15,8 +15,8 @@
       var renderedContent = this.template(this.model.toJSON());
       $(this.el).html(renderedContent);
       cssOptions = {
-        "left":(this.model.get("x") ) * 25 + "px",
-        "top":(this.model.get("y") ) * 25 + "px"
+        "left":(this.model.get("x") ) * 32 + "px",
+        "top":(this.model.get("y") ) * 32 + "px"
       }
       $(this.el).css(cssOptions);
       $(this.el).addClass(this.model.get("type"));
@@ -58,8 +58,8 @@
       return this;
     },
     handleClick: function(e){
-      var x = Math.floor((e.pageX - $(this.el).offset().left)/25);
-      var y = Math.floor((e.pageY - $(this.el).offset().top)/25);
+      var x = Math.floor((e.pageX - $(this.el).offset().left)/32);
+      var y = Math.floor((e.pageY - $(this.el).offset().top)/32);
 
       if( window.building ) {
         var job = "build"
@@ -100,8 +100,8 @@
       window.building = this.model.get("name");
       $('#jobs').mousemove(function(e){
         $("#buildingmarker").css({
-          top:e.pageY-12+"px",
-          left:e.pageX-12+"px"
+          top:e.pageY-16+"px",
+          left:e.pageX-16+"px"
         });
       });
     }
@@ -165,8 +165,8 @@
       var renderedContent = this.template(this.model.toJSON());
       $(this.el).html(renderedContent);
       cssOptions = {
-        "left":(this.model.get("x") - this.offsetX) * 25 + "px",
-        "top":(this.model.get("y") - this.offsetY) * 25 + "px"
+        "left":(this.model.get("x") - this.offsetX) * 32 + "px",
+        "top":(this.model.get("y") - this.offsetY) * 32 + "px"
       }
       $(this.el).css(cssOptions);
       return this;
@@ -243,8 +243,8 @@
     initialize: function() {
       this.startX = 0;
       this.startY = 0;
-      this.width  = 50;
-      this.height = 25;
+      this.width  = 25;
+      this.height = 19;
     },
     model: window.Block,
     url: function() {
@@ -257,7 +257,7 @@
 
   window.BlockView = Backbone.View.extend({
     tagName: 'div',
-    className: 'block',
+    className: 'block tile',
     events: {
       'click': 'handleClick'
     },
@@ -270,21 +270,23 @@
       var renderedContent = this.template(this.model.toJSON());
       $(this.el).html(renderedContent);
       cssOptions = {
-        "left":(this.model.get("x") - this.offsetX) * 25 + "px",
-        "top":(this.model.get("y") - this.offsetY) * 25 + "px"
+        "left":(this.model.get("x") - this.offsetX) * 32 + "px",
+        "top":(this.model.get("y") - this.offsetY) * 32 + "px"
       }
       $(this.el).css(cssOptions);
-      if(this.model.get("selected")) {
-        $(this.el).addClass('selected');
-      } else {
-        $(this.el).removeClass('selected');
-      }
-      if(parseInt(this.model.get("plants")) > 0) {
-        $(this.el).addClass('plant');
-      }
-      if(parseInt(this.model.get("objects")) > 0) {
-        $(this.el).addClass('object');
-      }
+      $(this.el).addClass(this.model.get("classes"));
+
+      // if(this.model.get("selected")) {
+      //   $(this.el).addClass('selected');
+      // } else {
+      //   $(this.el).removeClass('selected');
+      // }
+      // if(parseInt(this.model.get("plants")) > 0) {
+      //   $(this.el).addClass('plant');
+      // }
+      // if(parseInt(this.model.get("objects")) > 0) {
+      //   $(this.el).addClass('object');
+      // }
 
       return this;
     },
@@ -292,12 +294,14 @@
       if(window.building) {
         alert("place building!");
       }
-      if( this.model.get("selected")) {
-        this.model.set({selected: false});
+      classes = this.model.get("classes")
+      selected = classes.indexOf("selected")!== -1
+      if( selected ) {
+        this.model.set({classes: classes.replace("selected","")});
       } else {
-        this.model.set({selected: true});
+        this.model.set({classes: classes + " selected"});
       }
-      this.model.save({selected:this.model.get("selected")}, {
+      this.model.save({selected:!selected}, {
         success: function(model, response) {
           console.log(response);
         },
@@ -352,6 +356,19 @@
         case 39:
           window.map.startX++;
           break;
+        case 68:
+          window.command = "dig";
+          $("#jobs").show();
+          break;
+        case 80:
+          window.command = "pathfind";
+          $("#jobs").hide();
+          $("#mobs").hide();
+          break;
+        case 27:
+          window.command = "";
+          $("#mobs").show();
+          break;
       }
       window.map.fetch();
     }
@@ -361,7 +378,6 @@
     routes: {
       '': 'home'
     },
-
     initialize: function() {
       this.mapView = new MapView({
         collection: window.map
@@ -388,6 +404,7 @@
       $container.append(this.mobilesDetailView.render().el);
       $container.append(this.buildingsView.render().el);
       $container.append(this.jobsView.render().el);
+      $("#jobs").hide();
     }
   });
 
