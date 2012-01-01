@@ -55,12 +55,12 @@
     </script>
 
     <script type="application/javascript">
-      window.buildings.fetch();
-      window.map.fetch();
+      setInterval(function() {
         window.mobiles.fetch();
         window.jobs.fetch();
-      setInterval(function() {
       }, 200);
+      window.map.fetch();
+      window.buildings.fetch();
     </script>
 
     <style type="text/css">
@@ -78,6 +78,9 @@
         position:absolute;
         top:80px;
         left:0;
+      }
+      .zone {
+        border: 2px solid blue;
       }
       .job {
         width: 32px;
@@ -110,6 +113,20 @@
       }
       .grass {
         background-position: 0 -4896px;
+      }
+
+      .Pallet {
+        z-index: 10;
+        background-image:url('fancytiles.png');
+        background-position: -32px -768px;
+      }
+      .Rock {
+        background-image:url('fancytiles.png');
+        background-position: -224px -1025px;
+      }
+      .Wood {
+        background-image:url('fancytiles.png');
+        background-position: -64px -1088px;
       }
 
       .stone {
