@@ -15,8 +15,8 @@
       var renderedContent = this.template(this.model.toJSON());
       $(this.el).html(renderedContent);
       cssOptions = {
-        "left":(this.model.get("x") ) * 32 + "px",
-        "top":(this.model.get("y") ) * 32 + "px"
+        "left":(this.model.get("x") - this.offsetX) * 32 + "px",
+        "top":(this.model.get("y") - this.offsetY) * 32 + "px"
       }
       $(this.el).css(cssOptions);
       $(this.el).addClass(this.model.get("type"));
@@ -53,13 +53,15 @@
           model: job,
           collection: collection
         });
+        view.offsetX = window.map.startX;
+        view.offsetY = window.map.startY;
         $jobs.append(view.render().el);
       });
       return this;
     },
     handleClick: function(e){
-      var x = Math.floor((e.pageX - $(this.el).offset().left)/32);
-      var y = Math.floor((e.pageY - $(this.el).offset().top)/32);
+      var x = Math.floor((e.pageX - $(this.el).offset().left)/32) + window.map.startX;
+      var y = Math.floor((e.pageY - $(this.el).offset().top)/32) + window.map.startY;
 
       if( window.building ) {
         var job = "build"
