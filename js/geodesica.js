@@ -257,7 +257,7 @@
     }
   });
 
-  window.BlockView = Backbone.View.extend({
+  window.TileView = Backbone.View.extend({
     tagName: 'div',
     className: 'block tile',
     events: {
@@ -278,20 +278,11 @@
       $(this.el).css(cssOptions);
       $(this.el).addClass(this.model.get("classes"));
 
-      // if(this.model.get("selected")) {
-      //   $(this.el).addClass('selected');
-      // } else {
-      //   $(this.el).removeClass('selected');
-      // }
-      // if(parseInt(this.model.get("plants")) > 0) {
-      //   $(this.el).addClass('plant');
-      // }
-      // if(parseInt(this.model.get("objects")) > 0) {
-      //   $(this.el).addClass('object');
-      // }
-
       return this;
-    },
+    }
+  });
+
+  window.BlockView = TileView.extend({
     handleClick: function(){
       if(window.building) {
         alert("place building!");
