@@ -390,13 +390,15 @@
     },
 
     home: function() {
-      var $container = $('#container');
+      var $container = $('#map');
       $container.empty();
       $container.append(this.mapView.render().el);
       $container.append(this.mobilesView.render().el);
-      $container.append(this.mobilesDetailView.render().el);
       $container.append(this.buildingsView.render().el);
       $container.append(this.jobsView.render().el);
+      var $container = $('#detail');
+      $container.empty();
+      $container.append(this.mobilesDetailView.render().el);
       $("#jobs").hide();
     }
   });
