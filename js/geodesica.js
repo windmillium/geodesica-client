@@ -337,17 +337,33 @@
       console.log(window.map.startX);
       console.log(window.map.startY);
       switch(e.keyCode) {
-        case 38:
-          window.map.startY++;
+        case 98:
+          if(e.shiftKey)
+            dY = 10;
+          else
+            dY = 1;
+          window.map.startY += dY;
           break;
-        case 40:
-          window.map.startY = Math.max(window.map.startY-1,0);
+        case 104:
+          if(e.shiftKey)
+            dY = 10;
+          else
+            dY = 1;
+          window.map.startY = Math.max(window.map.startY - dY,0);
           break;
-        case 37:
-          window.map.startX = Math.max(window.map.startX-1,0);
+        case 100:
+          if(e.shiftKey)
+            dX = 10;
+          else
+            dX = 1;
+          window.map.startX = Math.max(window.map.startX - dX,0);
           break;
-        case 39:
-          window.map.startX++;
+        case 102:
+          if(e.shiftKey)
+            dX = 10;
+          else
+            dX = 1;
+          window.map.startX += dX;
           break;
         case 68:
           window.command = "dig";
