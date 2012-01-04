@@ -55,8 +55,10 @@
 
     <script type="application/javascript">
       setInterval(function() {
-        window.mobiles.fetch();
         window.jobs.fetch();
+      }, 1000);
+      setInterval(function() {
+        window.mobiles.fetch();
       }, 100);
       window.map.fetch();
       window.buildings.fetch();
