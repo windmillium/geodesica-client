@@ -334,36 +334,25 @@
       return this;
     },
     handleInput: function(e) {
-      console.log(window.map.startX);
-      console.log(window.map.startY);
+      dY = 0;
+      dX = 0;
+
       switch(e.keyCode) {
         case 98:
-          if(e.shiftKey)
-            dY = 10;
-          else
-            dY = 1;
-          window.map.startY += dY;
+        case 87:
+          dY = -1;
           break;
         case 104:
-          if(e.shiftKey)
-            dY = 10;
-          else
-            dY = 1;
-          window.map.startY = Math.max(window.map.startY - dY,0);
+        case 83:
+          dY = 1;
           break;
         case 100:
-          if(e.shiftKey)
-            dX = 10;
-          else
-            dX = 1;
-          window.map.startX = Math.max(window.map.startX - dX,0);
+        case 65:
+          dX = -1;
           break;
         case 102:
-          if(e.shiftKey)
-            dX = 10;
-          else
-            dX = 1;
-          window.map.startX += dX;
+        case 68:
+          dX = 1;
           break;
         case 68:
           window.command = "dig";
@@ -379,6 +368,14 @@
           $("#mobs").show();
           break;
       }
+
+      if(e.shiftKey) {
+        dY = dY * 10
+        dX = dX * 10
+      }
+
+      window.map.startX += dX;
+      window.map.startY += dY;
       window.map.fetch();
     }
   });
