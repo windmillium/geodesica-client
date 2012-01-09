@@ -177,17 +177,13 @@
 
   window.Mobiles = Backbone.Collection.extend({
     initialize: function() {
-      this.startX = 0;
-      this.startY = 0;
-      this.width  = 50;
-      this.height = 25;
     },
     model: window.Mobile,
     url: function() {
-      return '/game/mobiles?startx='+this.startX+
-        '&starty='+this.startY+
-        '&width='+this.width+
-        '&height='+this.height
+      return '/game/mobiles?startx='+window.map.startX+
+        '&starty='+window.map.startY+
+        '&width='+window.map.width+
+        '&height='+window.map.height
     }
   });
 
