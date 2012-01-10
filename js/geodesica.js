@@ -81,65 +81,6 @@
     }
   });
 
-  window.Building = Backbone.Model.extend({});
-  window.BuildingView = Backbone.View.extend({
-    tagName: 'div',
-    className: 'building',
-    events: {
-      'click': 'handleClick'
-    },
-    initialize: function() {
-      _.bindAll(this, 'render');
-      this.model.bind('change', this.render);
-      this.template = _.template($('#building-template').html());
-    },
-    render: function() {
-      var renderedContent = this.template(this.model.toJSON());
-      $(this.el).html(renderedContent);
-      return this;
-    },
-    handleClick: function(){
-      window.building = this.model.get("name");
-      $('#jobs').mousemove(function(e){
-        $("#buildingmarker").css({
-          top:e.pageY-16+"px",
-          left:e.pageX-16+"px"
-        });
-      });
-    }
-  });
-
-  window.Buildings = Backbone.Collection.extend({
-    initialize: function() {
-    },
-    model: window.Building,
-    url: "/game/templates"
-  });
-
-  window.BuildingsView = Backbone.View.extend({
-    id: "buildings",
-    initialize: function() {
-      _.bindAll(this, 'render');
-      this.template = _.template($('#buildings-template').html());
-      this.collection.bind('reset', this.render);
-    },
-    render: function() {
-      var $buildings
-      var collection = this.collection;
-      $(this.el).html(this.template({}));
-      $buildings = this.$('#buildings');
-      collection.each(function(building) {
-        var view = new BuildingView({
-          model: building,
-          collection: collection
-        });
-        $buildings.append(view.render().el);
-      });
-      return this;
-    }
-  });
-
-
   window.Mobile = Backbone.Model.extend({});
   window.MobileDetailView = Backbone.View.extend({
     tagName: 'div',
@@ -389,9 +330,6 @@
       });
       this.mobilesView = new MobilesView({
         collection: window.mobiles
-      });
-      this.buildingsView = new BuildingsView({
-        collection: window.buildings
       });
       this.jobsView = new JobsView({
         collection: window.jobs
