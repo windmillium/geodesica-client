@@ -244,7 +244,6 @@
 
   window.map = new Blocks();
   window.mobiles = new Mobiles();
-  window.buildings = new Buildings();
   window.jobs = new Jobs();
 
   window.MapView = Backbone.View.extend({
@@ -341,7 +340,6 @@
       $container.empty();
       $container.append(this.mapView.render().el);
       $container.append(this.mobilesView.render().el);
-      $container.append(this.buildingsView.render().el);
       $container.append(this.jobsView.render().el);
       var $container = $('#detail');
       $container.empty();
