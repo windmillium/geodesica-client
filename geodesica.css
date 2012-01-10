@@ -1,0 +1,204 @@
+.tile {
+  background-image: url('tiles.png');
+}
+
+#container {
+  position:relative;
+  overflow:hidden;
+}
+
+#jobs {
+  width: 800px;
+  height: 600px;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+#minimap {
+  position:absolute;
+  top:0;
+  left:0;
+  width:128px;
+  height:128px;
+  border: 1px solid black;
+}
+
+#mapcontrol {
+  position:absolute;
+  top:128px;
+  left:0px;
+  width:128px;
+  height:32px;
+  border: 1px solid black;
+}
+
+#log {
+  position:absolute;
+  bottom:0;
+  right:0;
+  width:256px;
+  height:512px;
+  border: 1px solid black;
+}
+
+#status {
+  position:absolute;
+  top:0;
+  right:0;
+  width:256px;
+  height:32px;
+  border: 1px solid black;
+}
+
+#detail {
+  position:absolute;
+  right:0;
+  bottom:256px;
+  width:256px;
+  height:256px;
+  border: 1px solid black;
+}
+
+.zone {
+  background:rgba(255,51,102,.25);
+}
+
+.Door {
+  background-image:url('tileset.png');
+  background-position: -1024px -801px;
+}
+
+.Food {
+  background-image:url('fancytiles.png');
+  background-position: -704px -1537px;
+}
+
+.Bush {
+  background-image:url('fancytiles.png');
+  background-position: -160px -1665px;
+}
+
+.Bed {
+  background-image:url('fancytiles.png');
+  background-position: -896px -1409px;
+}
+
+.WeaponStand {
+  background-image:url('fancytiles.png');
+  background-position: -896px -1666px;
+}
+
+.ArmorStand {
+  background-image:url('fancytiles.png');
+  background-position: -992px -1473px;
+}
+
+.Fence {
+  background-image:url('fancytiles.png');
+  background-position: -256px -1441px;
+}
+
+.job {
+  width: 32px;
+  height: 32px;
+  background: rgba(100,100,0,.25);
+  position:absolute;
+}
+
+.General {
+  background: rgba(200,100,0,.25);
+}
+
+.Mining {
+  background: rgba(200,0,100,.25);
+}
+
+.Table {
+  background-image:url('fancytiles.png');
+  background-position: -576px -1569px;
+}
+
+.Gardening {
+  background: rgba(0,256,200,1);
+}
+
+#mobs {
+  width: 800px;
+  height: 600px;
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+.block {
+  position: absolute;
+  height: 32px;
+  width: 32px;
+}
+
+.grass {
+  background-position: 0 -4896px;
+}
+
+.Pallet {
+  z-index: 10;
+  background-image:url('fancytiles.png');
+  background-position: -32px -768px;
+}
+
+.Rock {
+  background-image:url('fancytiles.png');
+  background-position: -224px -1025px;
+}
+
+.Wood {
+  background-image:url('fancytiles.png');
+  background-position: -64px -1088px;
+}
+
+.stone {
+  background-position: 0 -5184px;
+}
+
+.Tree {
+  background-position: -160px -4898px;
+}
+
+.mobile {
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  background-position: -32px -352px;
+  background-image: url('tileset.png');
+
+}
+
+#map {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+.selected {
+  border: 1px solid red;
+}
+
+.object {
+  background-image: url('tileset.png');
+  background-position: -1696px -321px;
+}
+
+#buildingmarker {
+  border: 1px solid red;
+  width:32px;
+  height:32px;
+  position:absolute;
+  z-index:-1;
+}
+
+.path {
+  border: 1px solid blue;
+}
